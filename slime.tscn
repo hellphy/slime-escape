@@ -1,0 +1,185 @@
+[gd_scene load_steps=17 format=3 uid="uid://byxwi0xym6b8q"]
+
+[ext_resource type="Script" path="res://slime.gd" id="1_58l37"]
+[ext_resource type="Texture2D" uid="uid://cj05ilb7tqadr" path="res://slime.jiggle.png" id="2_m88jk"]
+[ext_resource type="Texture2D" uid="uid://dg67dnpkqtuu7" path="res://icon.svg" id="3_6b0sr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fb47b"]
+atlas = ExtResource("2_m88jk")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwhqx"]
+atlas = ExtResource("2_m88jk")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1svb"]
+atlas = ExtResource("2_m88jk")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_excti"]
+atlas = ExtResource("2_m88jk")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64tnc"]
+atlas = ExtResource("2_m88jk")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42lgj"]
+atlas = ExtResource("2_m88jk")
+region = Rect2(320, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_je5y2"]
+atlas = ExtResource("2_m88jk")
+region = Rect2(384, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhabr"]
+atlas = ExtResource("2_m88jk")
+region = Rect2(448, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ncb4j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fb47b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwhqx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1svb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_excti")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64tnc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42lgj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_je5y2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhabr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 17.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fa2y6"]
+radius = 22.0227
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_2oxic"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0gbq5"]
+size = Vector2(1166, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_py3kk"]
+size = Vector2(62, 431)
+
+[node name="Main" type="Node2D"]
+
+[node name="charge" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = 159.0
+offset_top = 26.0
+offset_right = 367.0
+offset_bottom = 82.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+max_value = 800.0
+
+[node name="Slime" type="CharacterBody2D" parent="."]
+position = Vector2(317, 389)
+script = ExtResource("1_58l37")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Slime"]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_ncb4j")
+autoplay = "default"
+frame_progress = 0.0645069
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slime"]
+position = Vector2(0, 9)
+shape = SubResource("CircleShape2D_fa2y6")
+
+[node name="RayRight" type="RayCast2D" parent="Slime"]
+unique_name_in_owner = true
+position = Vector2(4, 10)
+rotation = -1.5708
+target_position = Vector2(0, 30)
+
+[node name="RayLeft" type="RayCast2D" parent="Slime"]
+unique_name_in_owner = true
+position = Vector2(4, 10)
+rotation = -4.71238
+target_position = Vector2(0, 30)
+
+[node name="guide" type="Sprite2D" parent="Slime"]
+unique_name_in_owner = true
+position = Vector2(-1, 10)
+scale = Vector2(126.5, 3.5)
+texture = SubResource("CanvasTexture_2oxic")
+offset = Vector2(0.498024, 0)
+
+[node name="velocity" type="Label" parent="Slime"]
+unique_name_in_owner = true
+top_level = true
+offset_left = 288.0
+offset_top = 294.0
+offset_right = 356.0
+offset_bottom = 317.0
+text = "velocity: "
+
+[node name="distance" type="Label" parent="Slime"]
+unique_name_in_owner = true
+top_level = true
+offset_left = 283.0
+offset_top = 319.0
+offset_right = 357.0
+offset_bottom = 342.0
+text = "distance: "
+
+[node name="rotation" type="Label" parent="Slime"]
+unique_name_in_owner = true
+top_level = true
+offset_left = 285.0
+offset_top = 342.0
+offset_right = 357.0
+offset_bottom = 365.0
+text = "rotation: "
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(573, 449)
+shape = SubResource("RectangleShape2D_0gbq5")
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(571.5, 449.5)
+scale = Vector2(9.08594, 0.382812)
+texture = ExtResource("3_6b0sr")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(728, 210)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+scale = Vector2(0.492188, 3.29688)
+texture = ExtResource("3_6b0sr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_py3kk")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(146, 214)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
+scale = Vector2(0.492188, 3.29688)
+texture = ExtResource("3_6b0sr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource("RectangleShape2D_py3kk")
+
+[connection signal="input_event" from="Slime" to="Slime" method="_on_input_event"]
