@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://w2ui4qv7fvp3"]
+
+[ext_resource type="Script" path="res://area_2d.gd" id="1_20awd"]
+[ext_resource type="Shader" path="res://guard_vision.gdshader" id="3_kk86a"]
+[ext_resource type="Texture2D" uid="uid://c81lv67k30ctb" path="res://cone.webp" id="4_2i4ti"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o4yql"]
+shader = ExtResource("3_kk86a")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_b45bc"]
+
+[node name="ViewCone" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_20awd")
+
+[node name="TargetLight" type="PointLight2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_o4yql")
+position = Vector2(327, -15)
+rotation = -1.57629
+scale = Vector2(0.530609, 0.650908)
+skew = -0.000118613
+color = Color(1, 0, 0, 1)
+energy = 0.91
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 1
+texture = ExtResource("4_2i4ti")
+offset = Vector2(20.3636, -321.99)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.554309, 0.528689, 0.528689, 1)
+position = Vector2(-5.87503, 100.125)
+scale = Vector2(1475.75, 981.75)
+texture = SubResource("CanvasTexture_b45bc")
+
+[node name="TargetArea" type="Polygon2D" parent="."]
+
+[node name="TargetCollision" type="CollisionPolygon2D" parent="."]
